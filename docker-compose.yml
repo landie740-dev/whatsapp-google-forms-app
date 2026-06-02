@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - GOOGLE_FORMS_API_KEY=${GOOGLE_FORMS_API_KEY}
+      - GOOGLE_FORMS_SPREADSHEET_ID=${GOOGLE_FORMS_SPREADSHEET_ID}
+      - GOOGLE_SHEETS_API_KEY=${GOOGLE_SHEETS_API_KEY}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_WHATSAPP_NUMBER=${TWILIO_WHATSAPP_NUMBER}
+      - WORKERS_SPREADSHEET_ID=${WORKERS_SPREADSHEET_ID}
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
